@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 //스포츠 센터
 //역할(ROLE - 인가) : user, manager, admin
 
@@ -29,8 +30,11 @@ public class indexController {
     }//end of index
 
     //http://localhost:8000/user
+    //@RestController = @Controller + @ResponseBody
+    //@Controller를 사용하면 리턴값 string으로 화면이름을 찾음.
+    //@RseponseBody를 사용하면 평문으로 출력됨.
     @GetMapping("/user")
-    public String user(){
+    public @ResponseBody String user(){
         log.info("user");
         return "user";
     }//end of user
@@ -70,9 +74,9 @@ public class indexController {
 
     //http://localhost:8000/login-error
     @GetMapping("/login-error")
-    public String loginError(){
+    public @ResponseBody String loginError(){
         log.info("login-error");
-        return "loginError";
+        return "아이디나 비밀번호가 맞지 않습니다.";
     }//end of loginError
 
     @PostMapping("/join")

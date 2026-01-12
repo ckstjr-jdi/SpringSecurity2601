@@ -33,9 +33,9 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/loginForm") //사용자 정의한 로그인 페이지
                         // -> /login이 호출되면 시큐리티가 낚아채서 대신 로그인을 진행함
-                        .loginProcessingUrl("/login") //로그인 요청 처리 URL(디폴트)
-                        .defaultSuccessUrl("/") //로그인 성공 후 이동할 페이지
-                        .failureUrl("/custom-login?error=true")//로그인실패시 이동할 페이지
+                        .loginProcessingUrl("/loginProcess") //로그인 요청 처리 URL(디폴트)
+                        .defaultSuccessUrl("/user") //로그인 성공 후 이동할 페이지
+                        .failureUrl("/login-error")//로그인실패시 이동할 페이지
                         .permitAll()
                 )
                 //로그아웃 설정 추가
@@ -51,8 +51,4 @@ public class SecurityConfig {
     //spring security 5이상에서는 비밀번호를 저장할 때 반드시 인코딩 방식이 명시되어야 함.
     //Spring Security 5+부터는 비밀번호 저장/검증 에 인코더 가 없으면 에러 발생
     // NoOpPasswordEncorder: 평문 그대로 비교함(암호화 없이 비교)
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return NoOpPasswordEncoder.getInstance();
-    }
 }
